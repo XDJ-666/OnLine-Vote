@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Layui</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+  <legend>成绩信息</legend>
+</fieldset>
+
+<table class="layui-table" lay-skin="line">
+  <colgroup>
+    <col width="130">
+    <col width="130">
+    <col width="150">
+    <col width="150">
+    <col width="150">
+    <col width="150">
+    <col width="150">
+    <col width="150">
+    <col width="160">
+    <col>
+  </colgroup>
+  <thead>
+  <tr>
+    <th>序号</th>
+    <th>比赛类型</th>
+    <th>歌手A</th>
+    <th>歌曲A</th>
+    <th>歌手A总成绩</th>
+    <th>歌手B</th>
+    <th>歌曲B</th>
+    <th>歌手B总成绩</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="item:${scores}">
+    <td th:text="${item.getBattleId()}"></td>
+    <td th:text="${item.getType()}"></td>
+    <td >
+        <span th:text="${item.getPlayerNameA()}"></span>
+        <span type="hidden" th:if="${item.getWinner()==item.getPlayerA()}">
+            <img th:src="@{/source/img/success.png}" src="../source/img/success.png" width="20px">
+        </span>
+    </td>
+    <td th:text="${item.getSongA()}"></td>
+    <td th:text="${item.getTotalA()}"></td>
+    <td >
+        <span th:text="${item.getPlayerNameB()}"></span>
+        <span type="hidden" th:if="${item.getWinner()==item.getPlayerB()}">
+            <img th:src="@{/source/img/success.png}" src="../source/img/success.png" width="20px">
+        </span>
+
+    </td>
+    <td th:text="${item.getSongB()}"> </td>
+    <td th:text="${item.getTotalB()}"></td>
+
+  </tr>
+  </tbody>
+</table>
+
+<script src="../source/layui/layui.js" th:src="@{/source/layui/layui.js}" ></script>
+<script>
+
+</script>
+
+</body>
+</html>

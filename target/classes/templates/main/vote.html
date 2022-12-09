@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <title>投票</title>
+    <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+    <link th:href="@{/source/css/bootstrap.min.css}" href="../source/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/source/css/pk.css}" href="../source/css/pk.css" rel="stylesheet">
+    <script src="../source/js/jquery.min.js" th:src="@{/source/js/jquery.min.js}"></script>
+</head>
+<body class="text-center">
+<a th:href="@{/loginout}" style="color: white;position: absolute;right: 100px;top: 70px;background-color: #1E9FFF " >退出登录</a>
+<div  class="form-signin">
+    <div th:each="item,status:${players}" >
+        <p th:value="${item.getBattleId()}" id="battleId" th:name="battleId"></p>
+        <div th:if="${status.count}==1">
+            <p type="hidden" th:value="${item.getPlayerId()}" name="playerIdA" id="playerIdA"></p>
+            <img th:src="@{/images/{image}(image=${item.getImage()})}" height="320px" width="400px"
+                 style="position: absolute;left: 130px;top: 220px;">
+            <p th:text="${item.getPlayerName()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 270px;top: 550px"></p>
+            <div  class="layui-form-item" style="position: absolute;left: 200px;top: 620px;">
+                <label class="layui-form-label" style="color: white;font-weight: bold">投票</label>
+                <div class="layui-input-block" >
+                    <a  class="layui-btn"  type="button" th:href="@{/poll/addPoll/1/}+${item.BattleId}+'/'+${item.PlayerId}">
+                        <i class="layui-icon layui-icon-praise"></i>
+                    </a>
+                </div>
+            </div>
+            <p th:if="${resultType}" style="color: white;position: absolute;left: 200px;top: 670px;">
+                您已经投过票了！
+            </p>
+        </div>
+        <div th:if="${status.count}==2">
+            <p type="hidden" th:value="${item.getPlayerId()}" name="playerIdB" id="playerIdB"></p>
+            <img th:src="@{/images/{image}(image=${item.getImage()})}" height="320px" width="400px"
+                 style="position: absolute;right: 130px;top: 220px;">
+            <p th:text="${item.getPlayerName()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 270px;top: 550px"></p>
+            <div  class="layui-form-item" style="position: absolute;right: 280px;top: 620px;">
+                <label class="layui-form-label" style="color: white;font-weight: bold">投票</label>
+                <div class="layui-input-block" >
+                    <a  class="layui-btn"  type="button" th:href="@{/poll/addPoll/2/}+${item.BattleId}+'/'+${item.PlayerId}" >
+                        <i class="layui-icon layui-icon-praise"></i>
+                    </a>
+                </div>
+            </div>
+            <p th:if="${resultType}" style="color: white;position: absolute;right: 280px;top: 670px;">
+                您已经投过票了！
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

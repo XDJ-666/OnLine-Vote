@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <title>评分页面</title>
+    <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+    <link th:href="@{/source/css/bootstrap.min.css}" href="../source/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/source/css/pk.css}" href="../source/css/pk.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<form method="post"   class="form-signin" action="/judge/addScore">
+    <a th:href="@{/loginout}" style="color: white;position: absolute;right: 100px;top: 70px;background-color: #1E9FFF " >退出登录</a>
+    <div th:each="item,status:${players}" >
+        <div th:if="${status.count}==1">
+            <img th:src="@{/images/{image}(image=${item.getImage()})}" height="320px" width="400px"
+                 style="position: absolute;left: 130px;top: 220px;">
+            <p th:text="${item.getPlayerName()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 270px;top: 550px"></p>
+           <div  class="layui-form-item" style="position: absolute;left: 160px;top: 620px;">
+               <label class="layui-form-label" style="color: white;font-weight: bold">评分</label>
+               <div class="layui-input-block" >
+                   <input type="text" name="scoreA" required  lay-verify="required" placeholder="请输入选手A得分" autocomplete="off" class="layui-input">
+               </div>
+           </div>
+        </div>
+        <div th:if="${status.count}==2">
+            <img th:src="@{/images/{image}(image=${item.getImage()})}" height="320px" width="400px"
+                 style="position: absolute;right: 130px;top: 220px;">
+            <p th:text="${item.getPlayerName()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 270px;top: 550px"></p>
+            <div  class="layui-form-item" style="position: absolute;right: 200px;top: 620px;">
+                <label class="layui-form-label" style="color: white;font-weight: bold">评分</label>
+                <div class="layui-input-block" >
+                    <input type="text" name="scoreB" required  lay-verify="required" placeholder="请输入选手B得分" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item" style="position: absolute;right: 880px;top: 800px;">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>

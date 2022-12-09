@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <title>用户登录界面</title>
+    <link th:href="@{/source/css/bootstrap.min.css}" href="../source/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/source/css/signin.css}" href="../source/css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center"  >
+<h1 class="content">在线投票系统</h1>
+<!--  用户登录form表单 -->
+<form method="post" th:action="@{/doRegister}"  class="form-signin" >
+    <h1 class="h3 mb-3 font-weight-normal">请注册</h1>
+    <input type="text" class="form-control" name="phone"
+           placeholder="手机号码" required="" autofocus="">
+    <div th:if="${flag}"
+         style="color: red;height: 40px;text-align: left;font-size: 1.1em">
+        <img th:src="@{/source/img/loginError.jpg}" src="../source/img/loginError.jpg" width="20px">该账号已经注册过了，请您直接登录！
+    </div>
+    <input type="password" class="form-control"  name="password"
+           placeholder="密码" required="" autofocus="">
+    <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
+    <a class="btn btn-lg btn-primary btn-block" type="button" href="toLogin">登录</a>
+</form>
+</body>
+</html>

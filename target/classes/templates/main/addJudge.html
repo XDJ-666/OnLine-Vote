@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加评委</title>
+  <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+  <script src="../source/layui/layui.js" th:src="@{/source/layui/layui.js}" ></script>
+</head>
+<body>
+<form class="layui-form" action="/main/addJudge" method="post">
+  <div class="layui-form-item" style="margin-top: 20px">
+    <label class="layui-form-label">评委账号</label>
+    <div class="layui-input-inline">
+      <input type="text"  name="account" required  lay-verify="required" placeholder="请输入账号" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">密码</label>
+    <div class="layui-input-inline">
+      <input type="password"  name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-form-mid layui-word-aux"></div>
+  </div>
+  <div class="layui-form-item">
+
+  </div>
+  <div class="layui-form-item layui-form-text">
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo"  type="submit">提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+</body>
+</html>

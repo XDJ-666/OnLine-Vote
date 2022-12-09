@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cg.Dao.UserDao">
+    <!-- 选手注册SQL   -->
+   <insert id="insertPlayer" parameterType="Player" >
+       insert into player(phone,playerName,image) values(#{phone},#{playerName},#{image})
+   </insert>
+    <!--  删除选手SQL  -->
+    <delete id="deletePlayer" parameterType="int">
+        delete from player where playerId=#{playerId}
+    </delete>
+<!--        查找选手是否已经被添加-->
+    <select id="selectPlayerByPhone" parameterType="string" resultType="int">
+        select count(*) from player where phone = #{phone}
+    </select>
+<!--    注册观众-->
+    <insert id="insertAudience" parameterType="Audience">
+        insert into audience(phone,password) values (#{phone},#{password})
+    </insert>
+    <!--查找观众是否注册-->
+    <select id="selectAudienceByPhone" parameterType="string" resultType="Audience">
+        select * from audience where phone=#{phone}
+    </select>
+    <!--添加评委账号-->
+    <insert id="insertJudge" parameterType="Judge">
+        insert into judge(account,password) values (#{account},#{password})
+    </insert>
+<!--    登录观众-->
+    <select id="selectAudience" parameterType="Audience" resultType="Audience">
+        select * from audience where phone=#{phone} and password=#{password}
+    </select>
+    <!--登录管理员-->
+    <select id="selectAdmin" parameterType="Admin" resultType="Admin">
+        select * from admin where account=#{account} and password=#{password}
+    </select>
+    <!--登录评委-->
+    <select id="selectJudge" parameterType="Judge" resultType="Judge">
+        select * from judge where account=#{account} and password=#{password}
+    </select>
+    <!--获取所有选手信息-->
+    <select id="getAllPlayer" resultType="Player">
+        select * from player
+    </select>
+    <!--根据ID查询选手-->
+    <select id="getPlayerById" resultType="Player" parameterType="int">
+        select * from player where playerId = #{playerId}
+    </select>
+    <select id="getBattlePlayerById" resultType="Battle_Player" parameterType="int">
+        select * from player where playerId = #{playerId}
+    </select>
+    <!--获取所有评委信息-->
+    <select id="getAllJudge" resultType="Judge">
+        select * from judge
+    </select>
+</mapper>

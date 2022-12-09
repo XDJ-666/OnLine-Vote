@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <title>用户登录界面</title>
+    <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+    <link th:href="@{/source/css/bootstrap.min.css}" href="../source/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/source/css/signin.css}" href="../source/css/signin.css" rel="stylesheet">
+</head>
+<body class="text-center">
+<!--  用户登录form表单 -->
+<form method="post" th:action="@{/doLogin}"  class="form-signin">
+    <img class="mb-4" th:src="@{/source/img/log.jpg}" src="../source/img/log.jpg" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+    <!-- 用户登录错误信息提示框 -->
+    <div th:if="${flag}"
+         style="color: red;height: 40px;text-align: left;font-size: 1.1em">
+        <img th:src="@{/source/img/loginError.jpg}" src="../source/img/loginError.jpg" width="20px">用户名或密码错误，请重新登录！
+    </div>
+    <input type="text" class="form-control" name="userName"
+           placeholder="用户名" required="" autofocus="">
+    <input type="password" class="form-control"  name="password"
+           placeholder="密码" required="">
+    <div  >
+        <input type="radio" name="tag" value="0" title="观众" checked="">观众
+        <input type="radio" name="tag" value="1" title="管理员">管理员
+        <input type="radio" name="tag" value="2" title="评委">评委
+    </div><br>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    <a class="btn btn-lg btn-primary btn-block" type="button" href="toRegister">注册</a>
+</form>
+</body>
+</html>

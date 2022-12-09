@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
+    <legend>投票信息</legend>
+</fieldset>
+
+<table class="layui-table" lay-skin="line">
+    <colgroup>
+        <col width="100">
+        <col width="120">
+        <col width="150">
+        <col width="150">
+        <col width="120">
+        <col width="150">
+        <col width="150">
+        <col width="150">
+        <col width="120">
+        <col width="150">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>比赛类型</th>
+        <th>歌手A</th>
+        <th>歌曲A</th>
+        <th>评分A</th>
+        <th>歌手A得票</th>
+        <th>歌手B</th>
+        <th>歌曲B</th>
+        <th>评分B</th>
+        <th>歌手B得票</th>
+        <th>投票通道状态设置</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item:${battleList}">
+        <td th:text="${item.getBattleId()}"></td>
+        <td th:text="${item.getType()}"></td>
+        <td th:text="${item.getPlayerNameA()}"></td>
+        <td th:text="${item.getSongA()}"></td>
+        <td th:text="${item.getScoreA()}"></td>
+        <td th:text="${item.getPollA()}"></td>
+        <td th:text="${item.getPlayerNameB()}"></td>
+        <td th:text="${item.getSongB()}"> </td>
+        <td th:text="${item.getScoreB()}"></td>
+        <td th:text="${item.getPollB()}"></td>
+        <td >
+            <p th:if="${item.getStatus()==0}">已开启</p>
+            <p th:if="${item.getStatus()==1}">已暂停</p>
+            <p th:if="${item.getStatus()==2}">已关闭</p>
+            <p th:if="${item.getStatus()==3}">未开始</p>
+            <a type="button" class="layui-btn layui-btn-sm layui-btn-normal" th:href="@{/battle/updateStatus/0/}+${item.BattleId}" >开启</a>
+            <a type="button" class="layui-btn layui-btn-sm layui-btn-warm" th:href="@{/battle/updateStatus/1/}+${item.BattleId}" >暂停</a>
+            <a type="button" class="layui-btn layui-btn-sm layui-btn-danger" th:href="@{/battle/updateStatus/2/}+${item.BattleId}">关闭</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<script src="../source/layui/layui.js" th:src="@{/source/layui/layui.js}" ></script>
+<script>
+
+</script>
+
+</body>
+</html>

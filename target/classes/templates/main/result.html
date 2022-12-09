@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta http-equiv="refresh" content="3;url=/showResult">
+    <title>结果显示</title>
+    <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+    <link th:href="@{/source/css/bootstrap.min.css}" href="../source/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/source/css/pk.css}" href="../source/css/pk.css" rel="stylesheet">
+    <script src="../source/js/jquery.min.js" th:src="@{/source/js/jquery.min.js}"></script>
+</head>
+<body class="text-center">
+<div  class="form-signin">
+    <div th:each="item,status:${players}" >
+        <p th:value="${item.getBattleId()}" id="battleId" th:name="battleId"></p>
+        <div th:if="${status.count}==1">
+            <p type="hidden" th:value="${item.getPlayerId()}" name="playerIdA" id="playerIdA"></p>
+            <img th:src="@{/images/{image}(image=${item.getImage()})}" height="320px" width="400px"
+                 style="position: absolute;left: 130px;top: 220px;">
+            <p th:text="${item.getPlayerName()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 270px;top: 550px"></p>
+            <span  style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 270px;top: 590px">
+                评分：
+            </span>
+            <span th:text="${item.getScoreA()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 350px;top: 590px"></span><br>
+            <span  style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 270px;top: 640px">
+                票数：
+            </span>
+            <span th:text="${item.getPollA()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;left: 340px;top: 640px"></span>
+        </div>
+        <div th:if="${status.count}==2">
+            <p type="hidden" th:value="${item.getPlayerId()}" name="playerIdB" id="playerIdB"></p>
+            <img th:src="@{/images/{image}(image=${item.getImage()})}" height="320px" width="400px"
+                 style="position: absolute;right: 130px;top: 220px;">
+
+            <p th:text="${item.getPlayerName()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 270px;top: 550px"></p>
+            <span  style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 290px;top: 590px">
+                评分：
+            </span>
+            <span th:text="${item.getScoreB()}"
+                  style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 215px;top: 590px">
+            </span><br>
+            <span  style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 290px;top: 640px">
+                票数：
+            </span>
+            <p th:text="${item.getPollB()}"
+               style="height: 40px;width: 120px;color: white;font-weight: bold;letter-spacing: 3px;font-size: xx-large;position: absolute;right: 210px;top: 640px"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

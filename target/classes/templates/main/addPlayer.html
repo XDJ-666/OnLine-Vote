@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" th:href="@{/source/layui/css/layui.css}" href="../source/layui/layui/css/layui.css">
+  <script src="../source/layui/layui.js" th:src="@{/source/layui/layui.js}" ></script>
+  <script src="../source/js/jquery.min.js" th:src="@{/source/js/jquery.min.js}"></script>
+</head>
+<body>
+<!--      表单-->
+<form class="layui-form" id="fileForm">
+  <div class="layui-form-item" style="margin-top: 20px">
+    <label class="layui-form-label">选手手机号</label>
+    <div class="layui-input-block">
+      <input type="text" id="phone" name="phone" required  lay-verify="required" placeholder="请输入手机号" autocomplete="off" class="layui-input">
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">选手的真实姓名</label>
+    <div class="layui-input-inline">
+      <input type="text" id="playerName" name="playerName" required lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-form-mid layui-word-aux"></div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">上传头像</label>
+    <div class="layui-input-block">
+      <input type="file" id="myfile" name="myfile"  required  lay-verify="required" placeholder="上传" autocomplete="off" class="layui-btn layui-btn-primary">
+    </div>
+  </div>
+  <div class="layui-form-item">
+
+  </div>
+  <div class="layui-form-item layui-form-text">
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo"  onclick="ajaxUpload()" type="submit">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+
+<script >
+  function ajaxUpload() {
+//获取表单数据,并添加到FormData中
+    let myfile = $("#myfile")[0].files[0];
+    let playerName = $("#playerName").val();
+    let phone = $("#phone").val();
+    let formData = new FormData();
+    formData.append("myfile", myfile);
+    formData.append("playerName", playerName);
+    formData.append("phone", phone);
+//发送AJAX请求
+    $.ajax({
+//定义请求地址
+      url: "/main/doAddPlayer",
+//定义请求类型
+      type: "post",
+//定义请求参数（使用js对象）
+      data: formData,
+//告诉jQuery不要去处理发送的数据，我们已经通过FormData处理了
+      processData: false,
+      contentType: false,
+//定义服务器响应的数据格式为json
+      dataType: "json",
+//成功响应的结果，data就是服务器返回的json对象
+      success: function (data) {
+        alert(data.msg);
+      }
+    });
+  }
+</script>
+</body>
+</html>

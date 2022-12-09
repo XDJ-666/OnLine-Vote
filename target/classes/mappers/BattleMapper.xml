@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cg.Dao.BattleDao">
+    <!--插入比赛信息-->
+    <insert id="insertBattleInfo" parameterType="Battle">
+        insert into battle(songA,songB,playerA,playerB,judgeId,type) values(#{songA},#{songB},#{playerA},#{playerB},#{judgeId},#{type})
+    </insert>
+    <!--获取比赛信息-->
+    <select id="getAllBattleInfo" resultType="BattleTall">
+        select * from battle
+    </select>
+    <!--修改状态-->
+    <update id="updateStatus" parameterType="Battle">
+        update battle set status = #{status} where battleId = #{battleId}
+    </update>
+    <!--修改获胜者-->
+    <update id="updateWinner" parameterType="Battle">
+        update battle set winner=#{winner} ,totalA = #{totalA},totalB = #{totalB} where  battleId = #{battleId}
+    </update>
+    <update id="updateWinnerScore" parameterType="winner">
+        update battle set winnerScore=#{winnerScore} where  battleId = #{battleId}
+    </update>
+    <!--获取正在比赛的选手信息-->
+    <select  id="getPlayerByStatus" resultType="Battle">
+        select * from battle where status = 0
+    </select>
+    <!--获取结束比赛信息-->
+    <select id="getEndingPlayer" resultType="Battle">
+        select * from battle where status = 2
+    </select>
+    <!--插入评分-->
+    <update id="updateScore" parameterType="Battle" >
+        update battle set scoreA = #{scoreA},scoreB = #{scoreB},judgeId=#{judgeId} where status = 0
+    </update>
+    <!--观众投票-->
+    <update id="updatePollA" parameterType="Battle" >
+        update battle set pollA = #{pollA} where battleId =#{battleId}
+    </update>
+    <update id="updatePollB" parameterType="Battle" >
+        update battle set pollB = #{pollB} where battleId =#{battleId}
+    </update>
+    <!--添加投票记录-->
+    <insert id="addPoll" parameterType="Vote">
+        insert into vote(battleId,playerId,audId) values (#{battleId},#{playerId},#{audId})
+    </insert>
+    <!--查询是否投过票-->
+    <select id="isVote" parameterType="Vote" resultType="int">
+        select count(*) from vote where battleId=#{battleId} and audId = #{audId}
+    </select>
+    <!--获取胜利者-->
+    <select id="getWinnerInfo" resultType="winner">
+        select winner,battleId,winnerScore from battle group  by winnerScore desc
+    </select>
+
+</mapper>
